@@ -1,6 +1,6 @@
 // Game initiation
 window.onload = () => {
-    new App();
+    let app = new App();
 }
 
 
@@ -14,10 +14,10 @@ window.onload = () => {
 function handleEventKeyPress(event) {
     if ( event.keyCode === key.Sapce ) {
         // Jump
+        app.fallguy.isRunning = false;
+    } else if ( event.keyCode === key.A || event.keyCode === key.D ) {
+        if ( app.fallguy.isRunning ) {
 
-    } else if ( event.keyCode === key.A ) {
-
-    } else if ( event.keyCode === key.D ) {
-
+        }
     }
 }

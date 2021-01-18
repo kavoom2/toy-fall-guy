@@ -11,7 +11,7 @@ class Fallguy {
         this.imgWidthHalf = this.imgWidth / 2;
         this.imgHeightHalf = this.imgHeight / 2;
 
-        this.initY = 300;
+        this.initY = -170;
 
         this.totalFrame = 14;
         this.curFrame = 0;
@@ -19,7 +19,7 @@ class Fallguy {
         this.fps = 30;
         this.fpsTime = 1000 / this.fps;
 
-        this.isRunning = false;
+        this.isRunning = true;
 
         this.jumpHeight = 100;
         this.jumpTime = 5;
@@ -91,11 +91,19 @@ class Fallguy {
         return Math.sin(numRad) * this.jumpHeight;
     }
 
+    isBlocked() {
+        if ((this.x - this.imgWidthHalf) > 0 || (this.x + this.imgWidthHalf < this.stageWidth ) ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
     animate(ctx) {
         //Img Shadow
         ctx.save();
-        ctx.translate(this.x, 0)
+        ctx.translate(this.x, this.y);
         ctx.drawImage(
             this.imgShadow,
             this.imgWidth * this.curFrame, // X축 기준 Sprite slicing 0이 기준
