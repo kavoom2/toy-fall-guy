@@ -9,7 +9,7 @@ class App {
 
         this.ground = new Ground();
         this.sky = new Sky(document.body.clientWidth, document.body.clientHeight);
-        this.WindController = new WindController();
+        this.windController = new WindController();
         this.fallguy = new Fallguy();
 
         this.resize();
@@ -28,7 +28,7 @@ class App {
         // 각 Component에게 화면크기값을 전달한다.
         this.ground.resize(this.stageWidth, this.stageHeight);
         this.sky.resize(this.stageWidth, this.stageHeight);
-        this.WindController.resize(this.stageWidth, this.stageHeight);
+        this.windController.resize(this.stageWidth, this.stageHeight);
         this.fallguy.resize(this.stageWidth, this.stageHeight);
     }
 
@@ -39,7 +39,7 @@ class App {
         // Component를 Canvas상에 그린다. (나중에 생성된 객체가 더 앞에 배치된다.)
 
         this.sky.draw(this.ctx, t)
-        this.WindController.draw(this.ctx);
+        this.windController.draw(this.ctx);
         this.ground.draw(this.ctx, t)
         this.fallguy.draw(this.ctx, t);
     }
