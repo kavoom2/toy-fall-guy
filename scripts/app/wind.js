@@ -1,4 +1,4 @@
-export class Wind {
+class Wind {
     constructor(stageWidth, stageHeight) {
         this.x;
         this.y;

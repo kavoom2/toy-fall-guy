@@ -1,8 +1,4 @@
-import {
-    SkyLine
-} from "./skyLine.js";
-
-export class Sky {
+class Sky {
     constructor(stageWidth, stageHeight) {
         this.items = [];
         this.items.push(new SkyLine(stageWidth, stageHeight, 0, 0));

@@ -1,4 +1,4 @@
-export class Fallguy {
+class Fallguy {
     constructor() {
         this.img = new Image();
         this.img.src = "./assets/images/fallGuy.png"

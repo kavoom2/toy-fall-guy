@@ -1,4 +1,4 @@
-export class Ground {
+class Ground {
     constructor() {
     }
 

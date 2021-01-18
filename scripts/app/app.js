@@ -1,19 +1,3 @@
-import {
-    Sky
-} from "/scripts/app/sky.js"
-
-import {
-    Ground
-} from "/scripts/app/ground.js"
-
-import {
-    WindController
-} from "/scripts/app/wind-controller.js"
-
-import {
-    Fallguy
-} from "/scripts/app/fallguy.js"
-
 class App {
     constructor() {
         this.canvas = document.createElement("canvas");
@@ -61,7 +45,7 @@ class App {
     }
 }
 
-// 페이지가 로드되면 자동으로 실행되도록 한다.
-window.onload = () => {
-    new App();
-}
+// // 페이지가 로드되면 자동으로 실행되도록 한다.
+// window.onload = () => {
+//     new App();
+// }

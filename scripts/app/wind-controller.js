@@ -1,8 +1,4 @@
-import {
-     Wind 
-} from "./wind.js";
-
-export class WindController {
+class WindController {
     constructor() {
         this.items = [];
         this.cur = 0;

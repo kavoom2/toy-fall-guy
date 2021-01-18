@@ -1,4 +1,4 @@
-export class SkyLine {
+class SkyLine {
     constructor(stageWidth, stageHeight, x, y) {
         [this.stageWidth, this.stageHeight] = [stageWidth, stageHeight];
         [this.x1, this.y1] = [x, y];
