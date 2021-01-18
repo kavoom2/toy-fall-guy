@@ -15,7 +15,6 @@ function addEventListener() {
 
 // Event Handler - Key Pressed
 function handleKeyDown(event) {
-    console.log(`${event.keyCode}, ${app.fallguy.multiplierA} ${app.fallguy.multiplierD}`);
     if ( event.keyCode === key.SPACE && app.fallguy.isJumpable === true && isKeyUp.SPACE ) {
         // Jump
         app.fallguy.isRunning = false;

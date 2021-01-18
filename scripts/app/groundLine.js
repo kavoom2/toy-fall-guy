@@ -5,7 +5,6 @@ class GroundLine {
         this.stageHeight = stageHeight;
         this.fps = 60;
         this.fpsTime = 1000 / this.fps;
-        this.blockColor = null;
         // Points
         this.cp = controlPoint;
         this.endP0 = {
@@ -44,8 +43,10 @@ class GroundLine {
         ]
         // Settings
         this.lineWidth = 15;
-        this.color = "#e4a149";
+        this.color = "#99792e";
+        this.colorChanged = false;
         this.speed = 1;
+        this.blockColor = null;
     }
 
 
@@ -71,8 +72,6 @@ class GroundLine {
         }
     
         // 2. Draw - Set a starting point
-        ctx.lineWidth = this.lineWidth;
-        ctx.strokeStyle = this.color;
         ctx.beginPath();
         let prevX = this.curPoint[0].x
         let prevY = this.curPoint[0].y
@@ -88,6 +87,8 @@ class GroundLine {
             prevX = curX;
             prevY = curY;
         }
+        ctx.lineWidth = this.lineWidth;
+        ctx.strokeStyle = this.color;
         ctx.stroke();
     }
 

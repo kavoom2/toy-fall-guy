@@ -9,7 +9,7 @@ class Ground {
             x: this.stageWidth / 2, 
             y: this.stageHeight / 2 - this.controlValue,
         }
-        this.firstBlockColor;
+        this.firstBlockColor = "#ffca4e";
         this.firstBlockRemoved = false;
         this.topP0 = {x: 0, y: this.stageHeight / 2};
         this.topP4 = {x: this.stageWidth, y: this.stageHeight / 2};
@@ -49,20 +49,39 @@ class Ground {
     getRandomColor() {
         const randomDice = Math.ceil(Math.random() * 4)
         if ( randomDice === 1) {
+            // Orange
             return "#ffca4e"
         } else if ( randomDice === 2) {
-            return "#fef572"
+            // light Green
+            return "#b0cf5c"
         } else if ( randomDice === 3) {
-            return "#fee475"
+            // Red
+            return "#f44e53"
         } else {
-            return "#fefa8c"
+            // teal
+            return "#61d09c"
         }
     }
 
+    getLineColor (blockColor) {
+        if ( blockColor === "#ffca4e") {
+            // Orange
+            return "#99792e"
+        } else if ( blockColor === "#b0cf5c") {
+            // light Green
+            return "#697c37"
+        } else if ( blockColor === "#f44e53") {
+            // Red
+            return "#922e31"
+        } else {
+            // teal
+            return "#3a7c5d"
+        }
+    }
 
     draw(ctx, t) {
-        // Make Line
-        ctx.fillStyle = "#fee388";
+        // Make Ground
+        ctx.fillStyle = "#ffca4e";
         ctx.beginPath();
         ctx.moveTo(this.topP0.x, this.topP0.y);
         ctx.lineTo(this.topP1.x, this.topP1.y);
@@ -137,6 +156,11 @@ class Ground {
                 }
                 ctx.fillStyle = curGroundLine.blockColor;
                 ctx.fill();
+
+                if ( !nextGroundLine.colorChanged ) {
+                    nextGroundLine.color = this.getLineColor(curGroundLine.blockColor);
+                    nextGroundLine.colorChanged = true;
+                }
             }
             // Final Line
             const groundLine = this.items[this.items.length - 1];
