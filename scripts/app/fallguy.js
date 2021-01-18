@@ -7,6 +7,7 @@ class Fallguy {
         this.imgShadow.src = "./assets/images/fallGuyShadow.png"
         this.imgWidth = 250;
         this.imgHeight = 300;
+        this.multiplier = 0;
         this.imgWidthHalf = this.imgWidth / 2;
         this.imgHeightHalf = this.imgHeight / 2;
 
@@ -23,7 +24,7 @@ class Fallguy {
         this.startMovingTime = null;
         this.isRunning = true;
         this.movementSpeed = 8;
-        this.isMovedAxisX = false; // only W and A
+        this.isMovableAxisX = false; // only W and A
         this.coordinateX = 0;
 
         // Action - Jump variables
@@ -95,43 +96,40 @@ class Fallguy {
 
 
         // Action: Axis X Movement
-        if ( this.isMovedAxisX ) {
+        if ( this.isMovableAxisX ) {
             if ( this.startMovingTime === null ) {
                 this.startMovingTime = t;
             }
             this.currentMovingTime = t;
             if ( this.currentMovingTime - this.startMovingTime >= (1000 / 60) ) {
                 this.startMovingTime = this.currentMovingTime;
-                // A, D가 눌렸을 경우 그 방향에 맞게 좌표를 이동할 수 있도록 합니다.
-                console.log(isKeyUp)
-                if ( isKeyUp.D === false ) {
-                    this.multiplier = 1;
-                }
-                if ( isKeyUp.A === false ) {
-                    this.multiplier = -1;
-                }
-                // A, D를 땠을 경우 반대 방향으로 이동하도록 한다.
-                if ( isKeyUp.A === true && isKeyUp.D === true ) {
-                    console.log("it works")
+                // A, D를 모두 누르거나 땠을 경우 서서히 멈추도록 합니다.
+                if ( (isKeyUp.A === true && isKeyUp.D === true)) {
                     if ( this.coordinateX > 0 ) {
                         this.multiplier = -1;
                     } else if (this.coordinateX < 0 ) {
                         this.multiplier = 1;
                     } else {
                         this.multiplier = 0;
-                        this.isMovableAxisX = false;
                     }
                 }
                 // 사인함수에 넣을 인자를 결정합니다.
-                this.coordinateX = this.coordinateX + this.multiplier / 20;
+                this.coordinateX = this.coordinateX + (this.multiplier + this.multiplierA + this.multiplierD) / 15;
                 if ( this.coordinateX > 1 ) {
                     this.coordinateX = 1;
                 } else if ( this.coordinateX < -1 ) {
                     this.coordinateX = -1;
+                } else if ( isKeyUp.A === true && isKeyUp.D === true ) {
+                    // 종료조건
+                    this.multiplier = 0;
+                    if ( Math.floor(Math.abs(this.coordinateX * 10)) === 0 ) {
+                        this.multiplier = 0;
+                        this.isMovableAxisX = false;
+                    }
                 }
                 // 이동값을 계산합니다.
                 this.dx = this.getPositionX(this.coordinateX);
-                if ( this.isMovableAxisX(this.x, this.dx) ) {
+                if ( this.isBlocked(this.x, this.dx) ) {
                     this.x += this.dx;
                 }
             }
@@ -139,6 +137,24 @@ class Fallguy {
         
         // Animate all Animations
         this.animate(ctx);
+    }
+    getMultiplierKeyDown(eventKey) {
+        if( eventKey === key.A ) {
+            this.multiplierA = -1;
+            this.multiplierD = 0;
+        }
+        else if ( eventKey === key.D ) {
+            this.multiplierD = 1;
+            this.multiplierA = 0;
+        }
+    }
+    getMultiplierKeyUp(eventKey) {
+        if( eventKey === key.A ) {
+            this.multiplierA = 0;
+        }
+        else if ( eventKey === key.D ) {
+            this.multiplierD = 0;
+        }
     }
 
     getPositionY(timePassed) {
@@ -151,7 +167,7 @@ class Fallguy {
         return Math.sin(numRadian) * this.movementSpeed;
     }
 
-    isMovableAxisX(x, dx) {
+    isBlocked(x, dx) {
         let newX = x + dx;
         if ((newX - this.imgWidthHalf) > 0 && (newX + this.imgWidthHalf < this.stageWidth ) ) {
             return true;

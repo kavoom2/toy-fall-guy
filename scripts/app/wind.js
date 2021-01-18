@@ -70,7 +70,6 @@ class Wind {
         this.width /= 1.05;
         this.speed.vx /= 1.08;
         this.speed.vy /= 1.08;
-        // this.rotateRad += this.vRad;
 
         ctx.save();
         ctx.translate(this.x, this.y);

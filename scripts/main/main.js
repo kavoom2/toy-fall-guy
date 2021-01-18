@@ -11,42 +11,38 @@ function addEventListener() {
     document.addEventListener("keyup", handleKeyUp);
 };
 
-const isKeyUp = {
-    // 스페이스를 계속 누르고 있어도 점프가 되지 않도록 해야 합니다.
-    SPACE: true,
-    A: true,
-    D: true,
-}
 
+
+// Event Handler - Key Pressed
 function handleKeyDown(event) {
+    console.log(`${event.keyCode}, ${app.fallguy.multiplierA} ${app.fallguy.multiplierD}`);
     if ( event.keyCode === key.SPACE && app.fallguy.isJumpable === true && isKeyUp.SPACE ) {
         // Jump
-        console.log( "space is pressed")
         app.fallguy.isRunning = false;
         app.fallguy.isJumpable = false;
         isKeyUp.SPACE = false;
-    } else if ( event.keyCode === key.A && isKeyUp.D === true ) {
+    } else if ( event.keyCode === key.A ) {
         if ( app.fallguy.isRunning ) {
-            app.fallguy.isMovedAxisX = true;
+            app.fallguy.isMovableAxisX = true;
+            app.fallguy.getMultiplierKeyDown(key.A)
             isKeyUp.A = false;
-            console.log("A Down activated")
         }
-    } else if ( event.keyCode === key.D && isKeyUp.A === true ) {
+    } else if ( event.keyCode === key.D ) {
         if ( app.fallguy.isRunning ) {
-            app.fallguy.isMovedAxisX = true;
+            app.fallguy.isMovableAxisX = true;
+            app.fallguy.getMultiplierKeyDown(key.D);
             isKeyUp.D = false;
-            console.log("D Down activated")
         }
     }
 }
 function handleKeyUp(event) {
     if ( event.keyCode === key.SPACE ) {
         isKeyUp.SPACE = true;
-    } else if ( event.keyCode === key.A && isKeyUp.A === false ) {
-        console.log("A Up activated")
+    } else if ( event.keyCode === key.A ) {
+        app.fallguy.getMultiplierKeyUp(key.A)
         isKeyUp.A = true;
-    } else if ( event.keyCode === key.D && isKeyUp.D === false ) {
-        console.log("D Up activated")
+    } else if ( event.keyCode === key.D ) {
+        app.fallguy.getMultiplierKeyUp(key.D);
         isKeyUp.D = true;
     }
 
