@@ -29,10 +29,10 @@ class Sky {
         ctx.fillStyle = "#4cc5fe";
         ctx.beginPath();
 
-        ctx.moveTo(0, this.stageHeight / 2);
-        ctx.quadraticCurveTo(this.stageWidth / 2, this.stageHeight / 2 - 50, this.stageWidth, this.stageHeight / 2);
+        ctx.moveTo(0, 0);
         ctx.lineTo(this.stageWidth, 0);
-        ctx.lineTo(0, 0)
+        ctx.lineTo(this.stageWidth, this.stageHeight);
+        ctx.lineTo(0, this.stageHeight);
         ctx.fill();
 
         for ( let i = 0; i < this.items.length; i++ ) {
