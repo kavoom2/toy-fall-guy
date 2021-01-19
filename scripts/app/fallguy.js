@@ -1,5 +1,5 @@
 class Fallguy {
-    constructor() {
+    constructor(stageHeight) {
         // Image variables
         this.img = new Image();
         this.img.src = "./assets/images/fallGuy.png"
@@ -12,7 +12,7 @@ class Fallguy {
         this.imgHeightHalf = this.imgHeight / 2;
 
         // start Y location
-        this.initY = 300;
+        this.initY = 0.29 * (stageHeight);
 
         // fps Animation variables
         this.totalFrame = 14;
@@ -194,7 +194,7 @@ class Fallguy {
             this.imgWidth, // 이미지 자르는 기준차 (W)
             this.imgHeight, // 이미지 자르는 기준치 (H)
             -this.imgWidthHalf,
-            this.initY,
+            this.initY * 1.05,
             this.imgWidth, // 이미지 폭
             this.imgHeight, // 이미지 높이
         )

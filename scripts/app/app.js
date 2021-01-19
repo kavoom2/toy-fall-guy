@@ -10,7 +10,7 @@ class App {
         this.ground = new Ground(document.body.clientWidth, document.body.clientHeight);
         this.sky = new Sky(document.body.clientWidth, document.body.clientHeight);
         this.windController = new WindController();
-        this.fallguy = new Fallguy();
+        this.fallguy = new Fallguy(document.body.clientHeight);
 
         this.resize();
         requestAnimationFrame(this.animate.bind(this));
