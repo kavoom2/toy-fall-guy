@@ -4,4 +4,3 @@ HTML5 Canvas 기능을 익히고자 진행한 토이 프로젝트입니다.
 
 
 <img src = "https://drive.google.com/uc?export=view&id=1n5plZiRSb7SqJKK3roX5aXZ-6d8SdZDs">
-2020-01-18 진행 중입니다. https://youtu.be/-F0pgU2-TAg
